@@ -1,0 +1,53 @@
+import math
+
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(math.sqrt(num)) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def calculate_sum_and_primes(limit):
+    prime_sum = 0
+    primes = []
+
+    for num in range(2, limit + 1):
+        if is_prime(num):
+            primes.append(num)
+            prime_sum += num
+
+    return prime_sum, primes
+
+# Überprüfen von Primzahlen aus vordefinierter Zahlenreihe
+numbers_to_check = [3, 4, 5, 7, 8, 10, 11, 13, 17, 19, 20]
+
+print("Überprüfen von Primzahlen aus vordefinierter Zahlenreihe:")
+for num in numbers_to_check:
+    if is_prime(num):
+        print(f"{num} ist eine Primzahl.")
+    else:
+        print(f"{num} ist keine Primzahl.")
+
+# Berechnen von Primzahlen mit verschiedenen Obergrenzen aus einem Textfile
+print("\nBerechnen von Primzahlen mit verschiedenen Obergrenzen:")
+file_name = r'limits.txt'  # Dateiname für die Obergrenzen
+
+try:
+    with open(file_name, 'r') as file:
+        limits = [int(line.strip()) for line in file.readlines() if line.strip()]
+
+    for limit in limits:
+        result_sum, result_primes = calculate_sum_and_primes(limit)
+
+        print(f"\nDie Summe der Primzahlen bis {limit} ist: {result_sum}")
+        print(f"Die Primzahlen sind: {result_primes}")
+
+        print("\nDiagramm der Primzahlen:")
+        for num in result_primes:
+            print('*' * num)
+
+except FileNotFoundError:
+    print(f"Die Datei '{file_name}' wurde nicht gefunden.")
+except Exception as e:
+    print(f"Ein Fehler ist aufgetreten: {e}")

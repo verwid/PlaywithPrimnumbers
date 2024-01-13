@@ -19,6 +19,9 @@ def calculate_sum_and_primes(limit):
 
     return prime_sum, primes
 
+print(is_prime_with_interface(5))
+print(is_prime_with_interface(8)) 
+
 # Überprüfen von Primzahlen aus vordefinierter Zahlenreihe
 numbers_to_check = [3, 4, 5, 7, 8, 10, 11, 13, 17, 19, 20]
 
